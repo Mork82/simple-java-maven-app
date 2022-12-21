@@ -18,7 +18,11 @@ job('Java Maven App DSL') {
         shell('''
           echo "Entrega: Desplegando la aplicación" 
           java -jar "/var/jenkins_home/workspace/Java Maven App DSL/target/my-app-1.0-SNAPSHOT.jar"
-        ''')  
+        ''')
+        publishers {
+            archiveArtifacts('target/*.jar')
+            archiveJunit('target/surefire-reports/*.xml')
+        }
     }
 
 }
